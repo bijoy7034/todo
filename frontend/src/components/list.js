@@ -164,7 +164,7 @@ const List = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={()=>{HandleEdit2()}} colorScheme='blue' mr={3}>
+            <Button onClick={()=>{HandleEdit2()}} bgColor='purple.400' color='white' mr={3}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

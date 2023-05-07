@@ -65,7 +65,7 @@ const FromAdd = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={()=>{AddNewTask()}} colorScheme='blue' mr={3}>
+            <Button onClick={()=>{AddNewTask()}} bgColor='purple.400' color='white' mr={3}>
               Add Task
             </Button>
             

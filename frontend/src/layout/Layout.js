@@ -32,7 +32,7 @@ const SideMenu = () => {
       <GridItem
         as="aside"
         colSpan={{ base: 6, lg: 2, xl: 1 }} 
-        bg="#4299E1"
+        bg="purple.400"
         minHeight={{ lg: '100vh' }}
         p={{ base: '20px', lg: '30px' }}
       >
@@ -48,8 +48,8 @@ const SideMenu = () => {
         p="30px"
       >
          <HStack className='heading2' spacing='900px'>
-        <Text className='text_todo' bg='#4299E1' bgClip='text' fontSize='4xl' fontWeight='extrabold'>All Tasks</Text> 
-         <Button onClick={onOpen} rightIcon={<AddIcon />} colorScheme='blue' variant='outline'>
+        <Text className='text_todo' bg='purple.400' bgClip='text' fontSize='4xl' fontWeight='extrabold'>All Tasks</Text> 
+         <Button onClick={onOpen} rightIcon={<AddIcon />} bgColor='purple.400' color='white' variant='outline'>
           Add Task
         </Button>
         </HStack>

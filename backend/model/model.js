@@ -23,7 +23,7 @@ const userModel = new Schema({
     color_card:{
         type:String,
         required:true,
-        default:'#63B3ED'
+        default:'purple.400'
     }
 }, {timestamps:true})
 
