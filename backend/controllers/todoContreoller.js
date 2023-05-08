@@ -48,9 +48,33 @@ const updateTask = async(req,res)=>{
     res.status(200).json(todo)
 }
 
+const getListPending = async(req,res)=>{
+    const todo = await userModel.find({marked:'Task Pending'}).sort({createdAt: -1})
+    if(!todo){
+        res.status(400).json({mssg:"Empty"})
+    }
+    res.status(200).json(todo)
+}
+const getListCompleted = async(req,res)=>{
+    const todo = await userModel.find({marked:'Task Completed'}).sort({createdAt: -1})
+    if(!todo){
+        res.status(400).json({mssg:"Empty"})
+    }
+    res.status(200).json(todo)
+}
+const deleteAll = async(req,res)=>{
+    const todo = await userModel.deleteMany({})
+    if(!todo){
+        res.status(400).json({mssg:"Not Deleted"})
+    }
+    res.status(200).json(todo)
+}
 module.exports ={
     createList,
     getList,
     deleteList,
-    updateTask
+    updateTask,
+    getListPending,
+    getListCompleted,
+    deleteAll
 }

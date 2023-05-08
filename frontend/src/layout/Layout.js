@@ -1,73 +1,104 @@
-import { Button, Grid, GridItem, HStack, Link, Modal, Text, useDisclosure } from "@chakra-ui/react"
+import { Grid, GridItem, HStack, IconButton, Modal, Text, useDisclosure } from "@chakra-ui/react"
 import List from "../components/list";
-import { AddIcon } from '@chakra-ui/icons';
+import { AddIcon} from '@chakra-ui/icons';
 import FromAdd from "../components/FormAdd";
 import React, { useEffect, useState } from "react";
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import Menu_todo from "../components/menu";
+import pic from '../assets/notFound.svg'
+import About from "../components/about";
 
 const SideMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [lists , setLists] = useState([])
-  const [loader, setLoader] = useState(0)
+  const [lists , setLists] = useState()
+  const [noItems , setNoItems] = useState(null)
+  const [loader, setLoader] = useState(null)
+  const [heading , setHeading] = useState('All Tasks')
   const onCloseSample = async()=>{
     await onClose()
     await setLoader(loader+1)
   }
 
+
+  const handleFilter = async()=>{
+        const res = await fetch('/api/todo/complete')
+        const data = await res.clone().json()
+        if(res.ok){
+          setLists(data)
+          setHeading('Completed Tasks')
+        }
+  }
+  const handleFilter2 = async()=>{
+        const res = await fetch('/api/todo/pending')
+        const data = await res.clone().json()
+        if(res.ok){
+          setLists(data)
+          setHeading('Pending Tasks')
+        }
+  }
+  
   useEffect(()=>{
       const fetchData= async()=>{
         const res = await fetch('/api/todo/')
         const data = await res.clone().json()
         if(res.ok){
           setLists(data)
-          console.log(lists)
+          setHeading('All Tasks')
+          if(!lists){
+            setNoItems(1)
+          }
+          else{
+            setNoItems(null)
+          }
+          
         }
       }
       fetchData()
+      
     },
     [loader])
 
     return ( 
         <div>
           <Grid templateColumns="repeat(6, 1fr)">
-      <GridItem
-        as="aside"
-        colSpan={{ base: 6, lg: 2, xl: 1 }} 
-        bg="purple.400"
-        minHeight={{ lg: '100vh' }}
-        p={{ base: '20px', lg: '30px' }}
-      >
-        <div class="section">
-        <div class="item"><Link>All Tasks</Link></div>
-        <div class="item"><Link>Settings</Link></div>
-        <div class="item"><Link>About</Link></div>
-  </div>
-      </GridItem>
-      <GridItem
-        as="main"
-        colSpan={{ base: 6, lg: 4, xl: 5 }} 
-        p="30px"
-      >
-         <HStack className='heading2' spacing='900px'>
-        <Text className='text_todo' bg='purple.400' bgClip='text' fontSize='4xl' fontWeight='extrabold'>All Tasks</Text> 
-         <Button onClick={onOpen} rightIcon={<AddIcon />} bgColor='purple.400' color='white' variant='outline'>
-          Add Task
-        </Button>
+            <GridItem as="aside" colSpan={{ base: 6, lg: 2, xl: 1 }} bg="purple.400" minHeight={{ lg: '100vh' }} p={{ base: '20px', lg: '30px' }}>
+            <div className="section">
+                <About/>
+            </div>
+          </GridItem>
+          <GridItem as="main" colSpan={{ base: 6, lg: 4, xl: 5 }} p="30px">
+            <HStack className='heading2' display='flex' justifyContent='space-between'>
+            <Text className='text_todo' bg='purple.400' bgClip='text' fontSize='4xl' fontWeight='extrabold'>{heading}</Text> 
+         <HStack>
+         <Menu_todo filter ={()=>{handleFilter()}} filter2 = {()=>{handleFilter2()}} close={()=>{onCloseSample()}}/>
+        <IconButton onClick={onOpen} icon={<AddIcon />} bgColor='purple.400' color='white' variant='outline'></IconButton>
+        </HStack>
         </HStack>
        
          <hr/>
           <p>All task that you have added</p>
-         <List items={lists} close={()=>{onCloseSample()}} />
-      </GridItem>
-    </Grid>
 
-    <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-      >
+         <>
+         <BrowserRouter>
+          <Routes>
+            <Route index path='/' element={<List items={lists} close={()=>{onCloseSample()}} />}></Route>
+          </Routes>
+         </BrowserRouter></>
+         <div>
+              {noItems ? (
+                <div className="icon_wrapper">
+                <img src={pic} className="App-svg" alt="logo" />
+                <h1>Add tasks by clicking the add button</h1>
+          </div>
+            ) : (<div></div>)}
+          </div>
+       </GridItem>
+      </Grid>
+
+    <Modal isOpen={isOpen} onClose={onClose}>
         <FromAdd  close={()=>{onCloseSample()}}/>
-      </Modal>
-
-        </div>
+    </Modal>
+    </div>
      );
 }
  

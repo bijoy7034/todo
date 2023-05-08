@@ -1,16 +1,4 @@
-import {
-  Button,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  useToast,
-} from '@chakra-ui/react'
+import { Button,ModalOverlay,ModalContent,ModalHeader,ModalFooter,ModalBody,ModalCloseButton,FormControl,FormLabel,Input, useToast, } from '@chakra-ui/react'
 import { useState } from 'react'
 
 const FromAdd = (props) => {

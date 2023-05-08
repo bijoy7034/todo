@@ -11,7 +11,7 @@ import {
   FormLabel,
   Input,
   Button,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 import { 
   SimpleGrid,
   Text,
@@ -30,7 +30,6 @@ import React, { useState } from "react"
 const List = (props) => {
   
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   const [marked] = useState('Task Completed')
@@ -38,7 +37,7 @@ const List = (props) => {
   const [idd, setId] = useState()
   const [title , setTitle] = useState("")
   const [details, setDetails] = useState("")
-  const [color_card, setColorCard] = useState('green')
+  const [color_card,] = useState('green')
   const toast = useToast()
     const HandleDelete = async(id)=>{
         await fetch('/api/todo/'+id, {
@@ -115,28 +114,26 @@ const List = (props) => {
     return ( 
         <div className="list">
           <SimpleGrid paddingTop='10px' spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
-  {props.items && props.items.map((item) =>  (
-    <Card borderLeft="8px" borderColor={item.color_card} bg='grey.400'>
-    <CardHeader paddingBottom='3'>
-      <Heading size='md'> {item.title}</Heading><Badge fontSize='0.7em' variant='solid' colorScheme={item.color}>
-       {item.marked}
-      </Badge>
-    </CardHeader>
-    <CardBody p='0' paddingLeft='5'>
-      <Text>{item.details}.</Text>
-    </CardBody>
-    <CardFooter>
-      <HStack spacing='14px'>
-                  <IconButton variant='solid'colorScheme='teal' size="xs" onClick={()=>{HandleUpdate(item._id)}} aria-label='Call Sage' fontSize='15px' icon={<CheckIcon />}/>
-                  <IconButton variant='solid'colorScheme='blue' size="xs" onClick={()=>{HandleEdit(item._id,item.title,item.details)}} aria-label='Call Sage' fontSize='15px' icon={<EditIcon />}/>
-                  <IconButton variant='solid'colorScheme='red'   size="xs" onClick={()=>{HandleDelete(item._id)}} aria-label='Call Sage' fontSize='15px' icon={<DeleteIcon />}/>
-               
+            {props.items && props.items.map((item) =>  (
+             <Card borderLeft="8px" borderColor={item.color_card} bg='grey.400'>
+                  <CardHeader paddingBottom='3'>
+                    <Heading size='md'> {item.title}</Heading><Badge fontSize='0.7em' variant='solid' colorScheme={item.color}>{item.marked}</Badge>
+                  </CardHeader>
+                  <CardBody p='0' paddingLeft='5'>
+                    <Text>{item.details}.</Text>
+                  </CardBody>
+                  <CardFooter>
+                  <HStack spacing='14px'>
+                    <IconButton variant='solid'colorScheme='teal' size="xs" onClick={()=>{HandleUpdate(item._id)}} aria-label='Call Sage' fontSize='15px' icon={<CheckIcon />}/>
+                    <IconButton variant='solid'colorScheme='blue' size="xs" onClick={()=>{HandleEdit(item._id,item.title,item.details)}} aria-label='Call Sage' fontSize='15px' icon={<EditIcon />}/>
+                    <IconButton variant='solid'colorScheme='red'   size="xs" onClick={()=>{HandleDelete(item._id)}} aria-label='Call Sage' fontSize='15px' icon={<DeleteIcon />}/>
                   </HStack>
-    </CardFooter>
-  </Card>
+                  </CardFooter>
+              </Card>
+              
   
   ))}
-</SimpleGrid>
+          </SimpleGrid>
 
 
 

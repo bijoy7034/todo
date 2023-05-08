@@ -1,4 +1,3 @@
-import List from "../components/list";
 import SideMenu from "../layout/Layout";
 
 const Home = () => {

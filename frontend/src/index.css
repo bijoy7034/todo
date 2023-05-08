@@ -23,3 +23,18 @@
 .section {
   padding: 20px;
 }
+.icon_wrapper{
+  margin-top: 8%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.App-svg{
+  width: 30%;
+}
+.icon_wrapper h1 {
+  margin-top: 4%;
+  font-size: large;
+  color: #34495e;
+}
