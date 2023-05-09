@@ -9,6 +9,7 @@ const FromAdd = (props) => {
 
     const  inputData= {title,details}
 
+    //Function that is trigged when user add a task
     const AddNewTask = async()=>{
         const res = fetch('https://todo-website-qcy0.onrender.com/api/todo/',{
             method:'POST',
@@ -35,7 +36,7 @@ const FromAdd = (props) => {
     return ( 
         <div>
             
-            <ModalOverlay />
+        <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create your tasks</ModalHeader>
           <ModalCloseButton />
