@@ -8,7 +8,7 @@ require('dotenv').config
 
 const PORT = process.env.PORT || 8080
 
-//Middlewares
+//Middlewares used
 app.use(express.json())
 app.use(cors())
 app.use((req, res, next) => {
@@ -21,7 +21,7 @@ app.get('/', (req,res)=>{
 app.use('/api/todo', router)
 
 
-//Database connection
+//Database connection and port connection
 mongoose.connect(uri)
 .then(()=>{
     app.listen(PORT, ()=>{

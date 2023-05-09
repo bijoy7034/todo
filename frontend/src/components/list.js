@@ -12,8 +12,7 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react';
-import { 
-  SimpleGrid,
+import { SimpleGrid,
   Text,
   Heading,
   Card, 
@@ -29,9 +28,13 @@ import { CheckIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import React, { useState } from "react"
 const List = (props) => {
   
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  //Constants for modal open and closing
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+
+  // useStates used in Lists
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [marked] = useState('Task Completed')
   const [color] = useState('green')
   const [idd, setId] = useState()
@@ -39,7 +42,9 @@ const List = (props) => {
   const [details, setDetails] = useState("")
   const [color_card,] = useState('green')
   const toast = useToast()
-    const HandleDelete = async(id)=>{
+
+  //Function that is trigged when user delete a task
+  const HandleDelete = async(id)=>{
         await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+id, {
             method:'DELETE'
         }).then(()=>{
@@ -54,6 +59,7 @@ const List = (props) => {
         })
     }
 
+    //Function that is trigged when user update a task
     const HandleUpdate = async(id)=>{
       const updateInp = {marked,color,color_card}
       await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+id, {
@@ -76,6 +82,7 @@ const List = (props) => {
       })
     }
 
+    //Function that is trigged for seting default details in edit text box when user clicks edit button
     const HandleEdit = async(id,title,details)=>{
       setTitle(title)
       setDetails(details)
@@ -84,6 +91,7 @@ const List = (props) => {
       
     }
 
+    //Function that is trigged when user Update a task
     const HandleEdit2 = async()=>{
       const updateInp = {title,details}
       await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+idd, {
@@ -134,8 +142,8 @@ const List = (props) => {
 
 
 
-
-<Modal
+    {/* Modal for createing tasks      */}
+    <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
@@ -143,7 +151,7 @@ const List = (props) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Create your Tasks</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>

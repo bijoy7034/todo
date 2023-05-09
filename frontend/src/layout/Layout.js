@@ -94,7 +94,7 @@ const SideMenu = () => {
           </div>
        </GridItem>
       </Grid>
-
+    {/* Modal for createing tasks      */}
     <Modal isOpen={isOpen} onClose={onClose}>
         <FromAdd  close={()=>{onCloseSample()}}/>
     </Modal>
