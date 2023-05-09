@@ -40,7 +40,7 @@ const List = (props) => {
   const [color_card,] = useState('green')
   const toast = useToast()
     const HandleDelete = async(id)=>{
-        await fetch('/api/todo/'+id, {
+        await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+id, {
             method:'DELETE'
         }).then(()=>{
            toast({
@@ -56,7 +56,7 @@ const List = (props) => {
 
     const HandleUpdate = async(id)=>{
       const updateInp = {marked,color,color_card}
-      await fetch('/api/todo/'+id, {
+      await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+id, {
         method:'PATCH',
         body: JSON.stringify(updateInp),
          headers: {
@@ -76,9 +76,6 @@ const List = (props) => {
       })
     }
 
-
-
-
     const HandleEdit = async(id,title,details)=>{
       setTitle(title)
       setDetails(details)
@@ -89,7 +86,7 @@ const List = (props) => {
 
     const HandleEdit2 = async()=>{
       const updateInp = {title,details}
-      await fetch('/api/todo/'+idd, {
+      await fetch('https://todo-website-qcy0.onrender.com/api/todo/'+idd, {
         method:'PATCH',
         body: JSON.stringify(updateInp),
          headers: {

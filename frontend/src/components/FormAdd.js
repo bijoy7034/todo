@@ -10,7 +10,7 @@ const FromAdd = (props) => {
     const  inputData= {title,details}
 
     const AddNewTask = async()=>{
-        const res = fetch('/api/todo/',{
+        const res = fetch('https://todo-website-qcy0.onrender.com/api/todo/',{
             method:'POST',
             body: JSON.stringify(inputData),
             headers: {

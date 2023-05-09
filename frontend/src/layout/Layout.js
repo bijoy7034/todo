@@ -21,7 +21,7 @@ const SideMenu = () => {
 
 
   const handleFilter = async()=>{
-        const res = await fetch('/api/todo/complete')
+        const res = await fetch('https://todo-website-qcy0.onrender.com/api/todo/complete')
         const data = await res.clone().json()
         if(res.ok){
           setLists(data)
@@ -29,7 +29,7 @@ const SideMenu = () => {
         }
   }
   const handleFilter2 = async()=>{
-        const res = await fetch('/api/todo/pending')
+        const res = await fetch('https://todo-website-qcy0.onrender.com/api/todo/pending')
         const data = await res.clone().json()
         if(res.ok){
           setLists(data)
@@ -39,7 +39,7 @@ const SideMenu = () => {
   
   useEffect(()=>{
       const fetchData= async()=>{
-        const res = await fetch('/api/todo/')
+        const res = await fetch('https://todo-website-qcy0.onrender.com/api/todo/')
         const data = await res.clone().json()
         if(res.ok){
           setLists(data)
